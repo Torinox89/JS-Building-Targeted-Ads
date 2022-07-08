@@ -5,7 +5,7 @@
                                                            
 async function getCoords(){
     pos = await new Promise((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition(resolve, reject)
+        navigator.geolocation.getCurrentPosition(resolve, reject);
     })
     return [pos.coords.latitude, pos.coords.longitude]
 }
@@ -18,7 +18,7 @@ function userTime(){
     const now = new Date()
     return now.getHours()
 }                
-   console.log(userTime())            
+        
                                                                                                              
                   
 // helper functions
@@ -28,7 +28,7 @@ function getMealTime(){
     const tod = userTime()
     return tod > 20 ? 'latenight snack' : tod > 16 ? 'dinner' : tod > 11 ? 'lunch' : 'breakfast'
 }
-console.log(getMealTime())                
+               
 
 
 // build ads
@@ -40,7 +40,7 @@ function buildAd1(){
     inner.innerHTML = `We've got the best <span>${mealTime}</span> in town`
     content.append(inner)
 }
-buildAd1()
+
 
 
 // Build Ad 2                                                             
@@ -53,11 +53,20 @@ function buildAd2(coordinates){
     content.append(inner)
 }
 
-console.log(buildAd2(getCoords()))
+
 
 
 // event listeners
-// on load, build ads
+// on load, build ads                                                           
+                                                          
+window.onload = async () => {
+    buildAd1()
+    const coords = await getCoords()
+    buildAd2(coords)
+}
+
+
+
                                                              
 // On load, build ads:                                                             
 window.onload = async () => {
